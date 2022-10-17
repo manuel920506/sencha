@@ -17,8 +17,7 @@ Ext.define('app.Application', {
 
     //sencha app refresh
     //sencha app rebuild 
-    launch: function(){
-      //Ext.Msg.alert('Stado','Cambios salvados correctamente!');  
+    launch: function(){ 
       this.showLogin();
      
     },
