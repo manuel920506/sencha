@@ -6,6 +6,7 @@ Ext.define("app.view.core.clientes.TabPanelClientes",{
 
 	items:[{
 		title:"Listado de clientes",
-		xtype:"panelclientes"
+		xtype:"panelclientes",
+		closable: true
 	}]
 });

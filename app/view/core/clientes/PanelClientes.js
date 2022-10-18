@@ -7,16 +7,15 @@ Ext.define("app.view.core.clientes.PanelClientes",{
 		text:"Agregar cliente",
 		handler: function (){
 
-			let windo = Ext.create("Ext.window.Window", {
+			let windo = Ext.create("base.window.ModalWindow", {
 				title:"Agregar cliente",
 				iconCls:"x-fa fa-user",
-
 				width: 400,
-				layout:"fit",
 
+				/*layout:"fit",
 				draggable: false,
 				resizable: false,
-				modal: true,
+				modal: true,*/
 
 				items: {
 					xtype:"formcliente"
@@ -36,10 +35,26 @@ Ext.define("app.view.core.clientes.PanelClientes",{
 		xtype:"textfield",
 		emptyText:"Buscar..."
 	}],
- 
-    layout: 'fit',
-    items:{
-        xtype: 'gridclientes'
-    }
-	
+
+	layout:"fit",
+
+	items:{
+		xtype:"gridclientes",
+		enableEliminar: false,
+
+		listeners:{
+			beforerender: function (){
+				console.info("Evento beforerender");
+			},
+			render: function (){
+				console.info("Evento render");
+			},
+			boxready: function (){
+				console.info("Evento boxready");
+			},
+			destroy: function (){
+				console.info("Evento destroy");
+			}
+		}
+	}
 });

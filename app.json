@@ -15,9 +15,13 @@
      *          "charts"
      *      ]
      */
-    "requires": [
-        "font-awesome"
+     "requires": [
+        "font-awesome",
+        "ext-locale",
+        "base"
     ],
+
+    "locale": "es",
 
     /**
      * The relative path to the application's markup file (html, jsp, asp, etc.).

@@ -1,7 +1,9 @@
 Ext.define("app.view.core.clientes.GridClientes",{
-	extend:"Ext.grid.Panel",
+	extend:"base.grid.GridPanelBase",
 
 	xtype:"gridclientes",
+
+	//enableEliminar: false,
 
 	store: {
 		data: [
@@ -12,47 +14,31 @@ Ext.define("app.view.core.clientes.GridClientes",{
 	    ]
 	},
 
-	enableRowNumberer: true,
-
-	enableEliminar: true,
-
-
-    initComponent: function (){
-
-    	this.columns= this.crearColumnas();
-
-    	this.callParent();
-    },
-
-    crearColumnas: function (){
-    	var cols = [
+	buildColumns: function (){
+		return [
 		        { text: 'Name', dataIndex: 'name' },
 		        { text: 'Email', dataIndex: 'email', flex: 1 },
 		        { text: 'Phone', dataIndex: 'phone' }
 		    ];
+	},
 
+	initComponent: function (){
+		console.info("initComponent - GridClientes");
+		this.callParent();
+	},
 
-	    if( this.enableRowNumberer	){
-			cols.splice(0 , 0, {
-				xtype:"rownumberer"
-			});
-	    }
+	onRender: function (){
+		console.info("onRender - GridClientes");
+		this.callParent();
+	},
 
+	afterRender: function (){
+		console.info("afterRender - GridClientes");
+		this.callParent();
+	},
 
-	    if( this.enableEliminar ){
-			cols.push( {
-	            xtype:'actioncolumn',
-	            width:50,
-	            items: [{
-	                iconCls: 'x-fa fa-trash',
-	                tooltip: 'Eliminar',
-	                handler: function(grid, rowIndex, colIndex) {
-	                    var rec = grid.getStore().removeAt(rowIndex);
-	                }
-	            }]
-	        });
-	    }
-
-		return cols; 
-    }
+	onDestroy: function (){
+		console.info("onDestroy - GridClientes");
+		this.callParent();
+	}
 });
