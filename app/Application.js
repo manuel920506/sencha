@@ -16,7 +16,7 @@ Ext.define('app.Application', {
     },
 
     //sencha app refresh
-    //sencha app rebuild 
+    //sencha app build development
     launch: function() {
 
         this.viewport = Ext.create("Ext.container.Viewport",{
