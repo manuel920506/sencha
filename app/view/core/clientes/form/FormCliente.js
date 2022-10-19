@@ -11,7 +11,7 @@ Ext.define("app.view.core.clientes.form.FormCliente",{
 	},
 
 	items: [{
-        name: 'textfield1',
+        name: 'nombre',
         fieldLabel: 'Text field',
         value: 'Text field value'
     }, {
@@ -74,6 +74,11 @@ Ext.define("app.view.core.clientes.form.FormCliente",{
         minValue: '1:30 AM',
         maxValue: '9:15 PM'
     }],
+
+    cargar: function(){
+
+    },
+
     guardar: function(){
         this.mask('Por favor, espere un momento.....');
         console.info('guardando: ', this.getValues());
@@ -91,7 +96,11 @@ Ext.define("app.view.core.clientes.form.FormCliente",{
                 else{
                     Ext.Msg.alert('Error', 'Ha ocurrido un error!');
                 }
-            }
+            }, 
+            failure: function(response, opts) {
+                this.unmask();
+                console.log('server-side failure with status code ' + response.status);
+           }
         });
     }
 });

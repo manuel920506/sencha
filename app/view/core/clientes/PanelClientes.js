@@ -6,7 +6,7 @@ Ext.define("app.view.core.clientes.PanelClientes",{
 	tbar:[{
 		text:"Agregar cliente",
 		handler: function (){
-
+ 
 			let windo = Ext.create("base.WindowForm", {
 				title:"Agregar cliente",
 				iconCls:"x-fa fa-user",
@@ -34,7 +34,7 @@ Ext.define("app.view.core.clientes.PanelClientes",{
 
 	items:{
 		xtype:"gridclientes",
-		enableEliminar: false,
+		// enableEliminar: false,
 
 		listeners:{
 			beforerender: function (){

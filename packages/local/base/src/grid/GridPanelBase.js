@@ -5,10 +5,16 @@ Ext.define("base.grid.GridPanelBase",{
 
 	enableEliminar: true,
 
+	enableEditar: true,
 
 	enablePaging: true,
 
     initComponent: function (){
+		this.store = Ext.create( this.storeClass ,{
+			autoLoad: true
+		});
+
+
 		console.info("initComponent - *** GridPanelBase");
     	this.columns= this.crearColumnas();
 
@@ -18,8 +24,6 @@ Ext.define("base.grid.GridPanelBase",{
 		        displayInfo: true
 		    });
 
-
-		    this.bbar.hide();
     	}
 
     	this.callParent();
@@ -35,6 +39,18 @@ Ext.define("base.grid.GridPanelBase",{
 			});
 	    }
 
+	    if( this.enableEditar ){
+			cols.push( {
+	            xtype:'actioncolumn',
+	            width:50,
+	            items: [{
+	                iconCls: 'x-fa fa-pencil-alt',
+	                tooltip: 'Editar',
+	                scope: this,
+	                handler: this.editarFila
+	            }]
+	        });
+	    }
 	    if( this.enableEliminar ){
 			cols.push( {
 	            xtype:'actioncolumn',
@@ -42,16 +58,30 @@ Ext.define("base.grid.GridPanelBase",{
 	            items: [{
 	                iconCls: 'x-fa fa-trash',
 	                tooltip: 'Eliminar',
-	                handler: function(grid, rowIndex, colIndex) {
-	                    var rec = grid.getStore().removeAt(rowIndex);
-	                }
+	                scope: this,
+	                handler: this.onEliminar
 	            }]
 	        });
 	    }
-
 		return cols;
     },
 
-    buildColumns: Ext.emptyFn
+    buildColumns: Ext.emptyFn,
+
+    editarFila: Ext.emptyFn,
+
+    onEliminar: function(grid, rowIndex, colIndex) {
+
+        var rec = grid.getStore().getAt(rowIndex);
+
+        Ext.Msg.confirm("Esta seguro?","Vamos a eliminar el registro seleccionado", function (resp){
+        	if(resp == "yes"){
+    			this.eliminar(rec);
+        	}
+        }, this);
+    },
+
+    eliminar: Ext.emptyFn
 });
+
 //sencha generate package base(base es el nombre del paquete generado)
