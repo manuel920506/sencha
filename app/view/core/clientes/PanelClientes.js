@@ -7,26 +7,20 @@ Ext.define("app.view.core.clientes.PanelClientes",{
 		text:"Agregar cliente",
 		handler: function (){
 
-			let windo = Ext.create("base.window.ModalWindow", {
+			let windo = Ext.create("base.WindowForm", {
 				title:"Agregar cliente",
 				iconCls:"x-fa fa-user",
-				width: 400,
-
-				/*layout:"fit",
-				draggable: false,
-				resizable: false,
-				modal: true,*/
-
-				items: {
-					xtype:"formcliente"
-				},
-
-				buttons:[{
-					text:"Guardar",
-					iconCls:"x-fa fa-save"
-				},{
-					text:"Cancelar"
-				}]
+				width: 400, 
+				xtypeForm: "formcliente" ,
+				listeners:{
+					scope: this,
+					datosguardadoz: function(win){
+						win.close();
+						var gridclientes = this.down("gridclientes");
+						console.log('datosguardadoz');
+						//gridclientes.store.load();
+					}
+				}
 			});
 
 			windo.show();

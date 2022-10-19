@@ -21,6 +21,7 @@ Ext.define("app.view.core.clientes.form.FormCliente",{
     }, {
         name: 'password1',
         inputType: 'password',
+        allowBlank: false,
         fieldLabel: 'Password field'
     }, {
         xtype: 'filefield',
@@ -72,5 +73,25 @@ Ext.define("app.view.core.clientes.form.FormCliente",{
         fieldLabel: 'Time Field',
         minValue: '1:30 AM',
         maxValue: '9:15 PM'
-    }]
+    }],
+    guardar: function(){
+        this.mask('Por favor, espere un momento.....');
+        console.info('guardando: ', this.getValues());
+
+        this.getForm().submit({
+            url: "server/clientes/guardar.json",
+            params: {},
+            scope: this,
+            success: function(form, resp){ 
+                this.unmask(); 
+                if(resp.result.success)
+                {
+                    this.fireEvent('datosguardados', this, resp.result);
+                }
+                else{
+                    Ext.Msg.alert('Error', 'Ha ocurrido un error!');
+                }
+            }
+        });
+    }
 });
